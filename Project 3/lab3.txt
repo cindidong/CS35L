@@ -1,0 +1,76 @@
+Cindi Dong
+Lab 2
+
+1. Commands: 
+scp ./coreutils-8.29.tar.xz cindi@lnxsrv09.seas.ucla.edu:~/
+scp ./coreutils-8.29.tar.xz.sig cindi@lnxsrv09.seas.ucla.edu:~/
+wget https://ftp.gnu.org/gnu/gnu-keyring.gpg
+tar -xJvf coreutils-8.29.tar.xz
+gpg --verify --keyring ./gnu-keyring.gpg coreutils-8.29.tar.xz.sig
+
+Warning:
+gpg: Signature made Wed 27 Dec 2017 10:29:05 AM PST using RSA key ID 306037D9
+gpg: Good signature from "Pádraig Brady <P@draigBrady.com>"
+gpg:                 aka "Pádraig Brady <pbrady@redhat.com>"
+gpg:                 aka "Pádraig Brady <pixelbeat@gnu.org>"
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 6C37 DC12 121A 5006 BC1D  B804 DF6F D971 3060 37D9
+This warning occurred because I never indicated the signature 
+belongs to the owner.
+
+2. Commands:
+mkdir tempCoreUtils (temp directory)
+cd coreutils-8.29
+emacs INSTALL (looked up how to install properly)
+(need to use configure command with absolute path)
+./configure --prefix=/u/be/ugrad/cindi/tempCoreUtils
+make
+make install
+
+3. Commands:
+(testing the /usr/bin ls)
+/usr/bin/ls -a -A
+/usr/bin/ls -a -A
+(testing the coreutils ls)
+cd tempCoreUtils/bin
+./ls -a -A
+./ls -A -a
+For both of them, -a overrides -A
+
+4. Commands:
+cd ~/coreutils-8.29
+emacs patch_file (pasted the patch diff file into this file)
+patch -p1 < patch_file
+
+Problems:
+patching file NEWS
+Hunk #1 FAILED at 4.
+1 out of 1 hunk FAILED -- saving rejects to file NEWS.rej
+patching file src/ls.c
+Hunk #1 succeeded at 1900 (offset -3 lines).
+patching file tests/local.mk
+Hunk #1 FAILED at 575.
+1 out of 1 hunk FAILED -- saving rejects to file tests/local.mk.rej
+patching file tests/ls/a-option.sh
+
+5. Commands:
+make (to compile)
+
+6. Commands:
+cd src
+./ls -a -A (the . and .. were not printed)
+./ls -A -a (the . and .. were printed)
+
+Question 1. In the case 'A', the patch removed the if statement 
+{if (ignore_mode == IGNORE_DEFAULT)}, 
+leaving only the body of the if statement. 
+Since the program no longer has to check the value of ignore_mode, 
+the program is faster.
+
+Question 2. They should watch out for any cases where the order 
+of -a and -A mattered. For example, any programs that used the fact 
+that -a would always override -A would now have unintended results, 
+since now -A will override -a.
+
+See hw3.txt for questions 3-5.
