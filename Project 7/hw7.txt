@@ -1,0 +1,159 @@
+Cindi Dong
+Lab 2
+
+HW:
+2. Checking out version 3.0
+Commands: 
+git clone https://git.savannah.gnu.org/git/diffutils.git hwdiffutils
+cd hwdiffutils
+git checkout v3.0 -b quote
+
+
+3. Installing my change
+Commands:
+patch -p1 < ../quote-3.0-patch.txt
+Output:
+patching file src/cmp.c
+patching file src/diff.c
+patching file src/diff3.c
+patching file src/dir.c
+patching file src/sdiff.c
+patching file src/util.c
+
+
+4. Learning Emacs function
+add-change-log-entry-other-window: adds a new entry to the change log 
+file for the file you are editing (C-x 4 a)
+
+
+5. Composing a ChangeLog entry
+Commands:
+emacs diffutils/ChangeLog-2008 (looked at formatting)
+emacs quote-patch.txt (copied original patch and edited it for the new patch)
+emacs quote-3.0-patch.txt
+C-x 4 a
+
+Contents of ChangeLog:
+2020-02-27  Cindi Dong  <cindi@lnxsrv03.seas.ucla.edu>
+*
+This is in response to a recent change in the 
+GNU coding standards, which now suggest quoting 'like this' or "like this", 
+instead of `like this' or ``like this''.
+* 
+* src/cmp.c, src/diff.c:
+* src/diff3.c, src/dir.c:
+* src/sdiff.c, src/util.c:
+Quote 'like this' or "like this" in commentary.
+* src/cmp.c (try_help, specify_ignore_initial, usage, main):
+* src/diff.c (main, try_help, option_help_msgid, specify_value)
+(compare_files):
+* src/diff3.c (main, try_help, option_help_msgid, usage)
+(read_diff):
+* src/dir.c (compare_names):
+* src/sdiff.c (try_help, usage, check_child_status, main):
+* src/util.c (finish_output):
+Quote 'like this' in output.
+
+
+6. Committing changes
+Commands:
+git add src/cmp.c
+git add src/diff.c
+git add src/diff3.c
+git add src/dir.c
+git add src/sdiff.c
+git add src/util.c
+
+git commit -F ~/ChangeLog
+
+
+7. Generating formatted-patch.txt
+Commands:
+git format-patch -1 --stdout > formatted-patch.txt
+cp formatted-patch.txt ..  (for the next part)
+
+
+8. Verifying if patch works
+Commands:
+git clone https://git.savannah.gnu.org/git/diffutils.git testdiffutils
+cd testdiffutils
+git checkout v3.0 -b patchery
+git am < ../formatted-patch.txt
+./bootstrap
+./configure
+make
+make check
+src/diff . -
+src/diff: cannot compare '-' to a directory
+
+src/diff --help
+FILES are 'FILE1 FILE2' or 'DIR1 DIR2' or 'DIR FILE...' or 'FILE... DIR'.
+If --from-file or --to-file is given, there are no restrictions on FILES.
+If a FILE is '-', read standard input.
+
+Both tests passed, so it does work.
+
+
+9. Verifying ChangeLog
+Commands:
+make distdir
+emacs diffutils-3.0.1-1dab/ChangeLog
+
+My ChangeLog entry is the first entry in the ChangeLog file:
+2020-02-28 Cindi Tian Dong <cindi@lnxsrv03.seas.ucla.edu>
+ * 35l/week7/quote-3.0-patch.txt: This is in response to a recent change in the
+ GNU coding standards, which now suggest quoting 'like this' or "like this",
+ instead of `like this' or ``like this''.
+ * src/cmp.c, src/diff.c:
+ * src/diff3.c, src/dir.c:
+ * src/sdiff.c, src/util.c:
+ Quote 'like this' or "like this" in commentary.
+ * src/cmp.c (try_help, specify_ignore_initial, usage, main):
+ * src/diff.c (main, try_help, option_help_msgid, specify_value)
+ (compare_files):
+ * src/diff3.c (main, try_help, option_help_msgid, usage)
+ (read_diff):
+ * src/dir.c (compare_names):
+ * src/sdiff.c (try_help, usage, check_child_status, main):
+ * src/util.c (finish_output):
+ Quote 'like this' in output.
+
+
+10. Gitk
+Commands:
+ssh -X cindi@lnxsrv03.seas.ucla.edu
+cd ~eggert/src/gnu
+cd emacs-CS-35L
+git log --after="2015-01-25 00:00" --before="2015-01-25 23:59"
+(First one is the newest merge that is not newer than 2015-01-25)
+gitk
+
+I then searched the commit ID on XQuartz to find the mergepoint.
+
+Mergepoint:
+SHA1 ID: 242354a23acf214ad06d4e3e7e5f5580c8b21d4a
+Author: Trevor Murphy <trevor.m.murphy@gmail.com>  2015-01-25 23:56:37
+Committer: Katsumi Yamaoka <yamaoka@jpl.org>  2015-01-25 23:56:37
+Parent: dafb0ef852f88f535df5527def7516a13bf63c60 
+(* lisp/net/shr.el (shr-make-table-1): Fix colspan typo.)
+Child:  4cdde9196fb4fafb00b0c51b908fd605274147bd 
+(* lisp/emacs-lisp/cl-generic.el: Add a method-combination hook.)
+Branches: master, remotes/origin/master and many more (254)
+Follows: emacs-24.4
+Precedes: emacs-25.0.90
+
+    lisp/gnus/nnimap.el Allow using the Google X-GM-LABELS, if present
+
+Subwindows:
+Upper left: History of commits.
+Upper middle: Names of the authors and contact info (email).
+Upper right: Date and time.
+Middle: SHA1 ID, and a search feature.
+Left bottom: Information about the commit, such as author, committer, message, 
+changes, etc.
+Right bottom: Files modified by the commit.
+
+
+Submitting the lab:
+tar czf hw7.tgz git-log.txt git-tags.txt quote-patch.txt quote-3.0-patch.txt 
+formatted-patch.txt
