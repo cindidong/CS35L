@@ -1,0 +1,197 @@
+Cindi Dong
+405126747
+
+Lab:
+1. The shell command is man -k [word].
+Shell Commands: 
+man man
+
+2. They are both located in /usr/bin (/usr/bin/mv and /usr/bin/sh). 
+Shell Commands:
+man which
+which mv
+which sh
+
+3. ar, pr, and tr.
+ar: create, modify, and extract from archives.
+pr: convert text files for printing.
+tr: translate, squeeze, and/or delete characters from standard input.
+Shell Commands:
+cd /usr/bin
+find -name '?r'
+man ar
+man pr
+man tr
+
+4. /etc/alternatives/emacs is executed.
+Shell Commands:
+ls -l /usr/bin/emacs
+
+5. The version number of /usr/bin/gcc is (gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-39)). The version number of the plain gcc program is (gcc (GCC) 9.2.0). They are different because different gcc programs can be stored in different paths. The plain gcc has been updated, while the one stored in /usr/bin/gcc has not.
+Shell Commands: 
+man emacs
+/version
+which gcc
+/usr/bin/gcc --version
+/usr/local/cs/bin/gcc --version
+
+6. u+sx sets the user ID on execution and lets the user execute. o-w removes the ability to write in a file from other users not in the file's group. 
+Shell Commands:
+man chmod
+
+7. 
+.
+./src/grep
+./src/grep/RCS
+./share/info
+./share/man/man1
+./bin
+./.del
+./.del/grep-3.3
+./grep-3.4
+./grep-3.4/share
+./grep-3.4/share/locale
+./grep-3.4/share/locale/af
+./grep-3.4/share/locale/af/LC_MESSAGES
+./grep-3.4/share/locale/be
+./grep-3.4/share/locale/be/LC_MESSAGES
+./grep-3.4/share/locale/bg
+./grep-3.4/share/locale/bg/LC_MESSAGES
+./grep-3.4/share/locale/ca
+./grep-3.4/share/locale/ca/LC_MESSAGES
+./grep-3.4/share/locale/cs
+./grep-3.4/share/locale/cs/LC_MESSAGES
+./grep-3.4/share/locale/da
+./grep-3.4/share/locale/da/LC_MESSAGES
+./grep-3.4/share/locale/de
+./grep-3.4/share/locale/de/LC_MESSAGES
+./grep-3.4/share/locale/el
+./grep-3.4/share/locale/el/LC_MESSAGES
+./grep-3.4/share/locale/eo
+./grep-3.4/share/locale/eo/LC_MESSAGES
+./grep-3.4/share/locale/es
+./grep-3.4/share/locale/es/LC_MESSAGES
+./grep-3.4/share/locale/et
+./grep-3.4/share/locale/et/LC_MESSAGES
+./grep-3.4/share/locale/eu
+./grep-3.4/share/locale/eu/LC_MESSAGES
+./grep-3.4/share/locale/fi
+./grep-3.4/share/locale/fi/LC_MESSAGES
+./grep-3.4/share/locale/fr
+./grep-3.4/share/locale/fr/LC_MESSAGES
+./grep-3.4/share/locale/ga
+./grep-3.4/share/locale/ga/LC_MESSAGES
+./grep-3.4/share/locale/gl
+./grep-3.4/share/locale/gl/LC_MESSAGES
+./grep-3.4/share/locale/he
+./grep-3.4/share/locale/he/LC_MESSAGES
+./grep-3.4/share/locale/hr
+./grep-3.4/share/locale/hr/LC_MESSAGES
+./grep-3.4/share/locale/hu
+./grep-3.4/share/locale/hu/LC_MESSAGES
+./grep-3.4/share/locale/id
+./grep-3.4/share/locale/id/LC_MESSAGES
+./grep-3.4/share/locale/it
+./grep-3.4/share/locale/it/LC_MESSAGES
+./grep-3.4/share/locale/ja
+./grep-3.4/share/locale/ja/LC_MESSAGES
+./grep-3.4/share/locale/ko
+./grep-3.4/share/locale/ko/LC_MESSAGES
+./grep-3.4/share/locale/ky
+./grep-3.4/share/locale/ky/LC_MESSAGES
+./grep-3.4/share/locale/lt
+./grep-3.4/share/locale/lt/LC_MESSAGES
+./grep-3.4/share/locale/nb
+./grep-3.4/share/locale/nb/LC_MESSAGES
+./grep-3.4/share/locale/nl
+./grep-3.4/share/locale/nl/LC_MESSAGES
+./grep-3.4/share/locale/pa
+./grep-3.4/share/locale/pa/LC_MESSAGES
+./grep-3.4/share/locale/pl
+./grep-3.4/share/locale/pl/LC_MESSAGES
+./grep-3.4/share/locale/pt
+./grep-3.4/share/locale/pt/LC_MESSAGES
+./grep-3.4/share/locale/pt_BR
+./grep-3.4/share/locale/pt_BR/LC_MESSAGES
+./grep-3.4/share/locale/ro
+./grep-3.4/share/locale/ro/LC_MESSAGES
+./grep-3.4/share/locale/ru
+./grep-3.4/share/locale/ru/LC_MESSAGES
+./grep-3.4/share/locale/sk
+./grep-3.4/share/locale/sk/LC_MESSAGES
+./grep-3.4/share/locale/sl
+./grep-3.4/share/locale/sl/LC_MESSAGES
+./grep-3.4/share/locale/sr
+./grep-3.4/share/locale/sr/LC_MESSAGES
+./grep-3.4/share/locale/sv
+./grep-3.4/share/locale/sv/LC_MESSAGES
+./grep-3.4/share/locale/th
+./grep-3.4/share/locale/th/LC_MESSAGES
+./grep-3.4/share/locale/tr
+./grep-3.4/share/locale/tr/LC_MESSAGES
+./grep-3.4/share/locale/uk
+./grep-3.4/share/locale/uk/LC_MESSAGES
+./grep-3.4/share/locale/vi
+./grep-3.4/share/locale/vi/LC_MESSAGES
+./grep-3.4/share/locale/zh_CN
+./grep-3.4/share/locale/zh_CN/LC_MESSAGES
+./grep-3.4/share/locale/zh_TW
+./grep-3.4/share/locale/zh_TW/LC_MESSAGES
+./grep-3.4/share/man
+./grep-3.4/share/man/man1
+./grep-3.4/share/info
+./grep-3.4/bin
+Shell Commands:
+man find
+cd /usr/local/cs
+find . -mtime -28 -type d
+
+8. 303 symbolic links.
+Shell Commands:
+which find
+man find
+man wc
+find /usr/bin -type l | wc -l
+
+9. librom1394.so.0.3.0
+Shell Commands:
+man ls
+ls -lta /usr/lib64
+
+10. Locale gets its data from the settings of the environment variables that control the locale. This is stored in /usr/share/i18n/locales.
+Shell Commands:
+man locale
+
+11. The commands are downcase-dwim, downcase-region, and downcase-word.
+Emacs Commands:
+C-h r
+C-h a
+
+12. 
+C-M-r: Begin reverse incremental regexp search
+C-M-s: Begin incremental regexp search
+C-M-t: Transpose two balanced expressions ('transpose-sexps')
+C-M-u: Move up in parenthesis structure ('backward-up-list')
+C-M-v: Scroll the next window ('scroll-other-window')
+Shell Commands:
+C-s C-M-r
+C-s C-M-s
+C-s C-M-t
+C-s C-M-u
+C-s C-M-v
+
+13. C-g quits a partially entered command.
+Emacs Commands:
+C-s C-g
+
+14. Yank moves from the kill ring to a buffer (pasting), and it is invoked by C-y.
+Emacs Commands:
+C-s yank
+
+15. Dired is more interactive than ls -l. You can delete, rename, etc. In addition, it also shows the total space available in the directory and does not ignore files beginning with a period (.).
+Commands:
+cd /usr/bin
+ls -l
+emacs
+C-h a dired
+C-x d /usr/bin

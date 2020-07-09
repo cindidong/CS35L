@@ -1,0 +1,29 @@
+--- exer1.html	2019-12-25 00:10:26.000000000 -0800
++++ exer3.html	2019-12-25 00:58:34.000000000 -0800
+@@ -1,15 +1,15 @@
+ <!DOCTYPE html>
+ <html lang='en'>
+ <head>
+-<title>Assignment 1. Getting to know your system</title>
+-<meta charset='UTF-8'>
++<title>Assignment 42. Getting to know your system</title>
++<meta charset='US-ASCII'>
+ <link rel='author' href='mailto:eggert@cs.ucla.edu'>
+ <link rel='license' href='copyright.html'>
+ </head>
+ 
+ <body>
+ 
+-<h1>Assignment 1. Getting to know your system</h1>
++<h1>Assignment 42. Getting to know your system</h1>
+ 
+ <p><small>[<a href='../index.html'>35L home</a> &gt; <a href='../assign.html'>assignments</a>]</small></p>
+ 
+@@ -122,6 +122,7 @@
+ and the directory listing of the Emacs <samp>dired</samp> command?
+ List any shell or Emacs commands you used to answer this question.</li>
+ </ol>
++
+ </section>
+ 
+ <section>
