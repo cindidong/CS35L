@@ -1,0 +1,100 @@
+Cindi Dong
+Lab 2
+
+
+1. Disk Space
+Commands:
+cd ~eggert/src/gnu/emacs-CS-35L
+du -h    (509M)
+du -h .git (350M)
+335M  .git/objects/pack
+7.8M  .git/objects/info
+342M  .git/objects
+The working files is the files in the git repo except the .git directory 
+(509M - 350M = 159M). 
+The Git repository is 350M.
+The files stored in the objects folder consume the most space. This is because 
+these files store its own hash number, the hash number for its parents and children, etc.
+
+
+2. Branches
+Commands:
+git branch | wc -l
+176 branches for local
+git branch -r | wc -l
+177 branches for remote
+
+
+3. Remote repositories
+Commands:
+git remote -v
+Output:
+origin	https://git.savannah.gnu.org/git/emacs.git (fetch)
+origin	https://git.savannah.gnu.org/git/emacs.git (push)
+There is one repository remote to this repository, and it is located on 
+https://git.savannah.gnu.org/git/emacs.git
+
+
+4. Recent local branches
+Commands:
+git for-each-ref --sort=-committerdate --count=10 refs/heads/
+19aecd340b7b3ab54629b790ba70a90130bad63d commit	  refs/heads/master
+d2873706749ef68803e79bab6109a534f4c9d23a commit	  refs/heads/scratch/joaot/make-completion-at-point-function
+dd3fa9411a28175f9a1a984a69cfa7162023c5df commit	  refs/heads/feature/windows-with-utils
+8f22251e595d7598d6643b0d24bf5f409dc59fa8 commit	  refs/heads/scratch/completion-api
+8a4de19dfb52551a65c360a9346ede137d0fc6e8 commit	  refs/heads/scratch/a-modest-completion-redesign-proposal
+2b0f589134d9427a96ab8cf0d8473715740984ef commit	  refs/heads/scratch/fido-mode
+924a4201d24c10c48db920815ebf98dfaadc1e85 commit	  refs/heads/feature/gnus-select2
+7a10082093791f0e035e4f9f95a774a7be1cd586 commit	  refs/heads/feature/extend_face_id
+079461b360a2467ff4ab2ec57516c6f9e45f50fe commit	  refs/heads/scratch/jit-lock-antiblink-cleaned-up
+55dcd32ad2209dc34bfb6b713bf73be9bf4c4cb2 commit	  refs/heads/emacs-26
+
+
+5. Commits in master branch
+Commands:
+git rev-list HEAD | wc -l
+139583 commits in master branch
+
+
+6. Percentage of commits
+Commands:
+git rev-list --all | wc -l
+143910 commits in all refs
+139583/143910 = 0.9699 => 96.99% of commits that are in any branch that are also
+in the master branch.
+
+
+7. Authors after 2013
+Commands: 
+git shortlog -n -s --since="31 Dec 2012" HEAD
+  3691	     Eli Zaretskii
+  3647	     Glenn Morris
+  3605	     Paul Eggert
+  1806	     Lars Ingebrigtsen
+  1784	     Stefan Monnier
+  1571	     Michael Albinus
+   619	     Dmitry Gutov
+   576	     Noam Postavsky
+   471	     Alan Mackenzie
+   469	     Juri Linkov
+HEAD has the location of the head branch, --since outputs the commits after a date, 
+-s summarizes the data, and -n sorts by the count
+
+
+8. Gitk
+Commands:
+git log 4ea37c2b8b0c5a68fde59770c3536195e0972217
+git log 977cd6cb28a37744966ec62f70cf62659f6f302a
+git log 625cee531623feddbe3174fad52c7db96ec60bb3
+git log 5490ccc5ebf39759dfd084bbd31f464701a3e775
+git log 0c06b93c1e467debd401eb0b3be4652fde14fa95 (Merge: c4e6ff0 96aaeaa)
+git log 820739bbb572b30b6ce45756c9960e48dca859af
+git log 00e4e3e9d273a193620c3a4bb4914e555cb8e343
+git log 49cd561dc62ea6b3fbedab7aef0f020733f4cf09
+git log abcb2e62dae6aa26308f7ac9efc89247f89cbe65 (Merge: 0bd61c2 49cd561)
+git log 98ac36efe4ce4bd3a0bca76fc73ce6c7abaa4371 (Merge: 5406be4 1e59496)
+I looked at all the log for each commits to see if it was a merge. 
+The ones that were merged are listed below: 
+0c06b93c1e467debd401eb0b3be4652fde14fa95
+abcb2e62dae6aa26308f7ac9efc89247f89cbe65
+98ac36efe4ce4bd3a0bca76fc73ce6c7abaa4371
