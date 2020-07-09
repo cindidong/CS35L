@@ -1,0 +1,24 @@
+Cindi Dong
+Lab 2
+
+
+Part 1: Using OpenSSH
+Commands:
+ssh-keygen (used to generate keypair)
+ssh-keygen -l (to see the hash)
+ssh-copy-id cindi@lnxsrv.seas.ucla.edu:
+eval $(ssh-agent)
+ssh-add
+
+
+
+Part 2: Port Forwarding
+Commands:
+ssh -X cindi@lnxsrv09.seas.ucla.edu
+xeyes
+
+
+
+Part 3: Daisy-Chain
+Commands:
+ssh -X -A cindi@lnxsrv09.seas.ucla.edu

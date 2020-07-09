@@ -1,0 +1,50 @@
+Cindi Dong
+Lab 2
+
+
+Commands:
+gpg --gen-key 
+(generate keys)
+
+gpg --output hw-pubkey.asc --armor --export cindidong@g.ucla.edu 
+(export a public key)
+
+gpg --armor --output hw-pubkey.sig --detach-sig hw-pubkey.asc 
+(create a detached signature)
+
+gpg --verify hw-pubkey.sig hw-pubkey.asc 
+(verify the signature)
+
+
+
+1. Security issues:
+If other teams had been observing all the bytes going across the network in the lab
+exercise, it would still be secure. Ssh is secure, as you only send and receive public
+keys. Likewise, any data sent after that between my local computer and the SEASnet server
+is encrypted through a symmetric key generated from the initial connection.
+
+If other teams had been tapping my keyboard, it would be generally secure. If I ssh into
+the SEASnet server with my password, it would not be secure as they now have my password
+and could log in as me. However, if I completed the later steps of the lab, it would be
+secure. Authentication is done through asymmetric encryption (server encrypts message with
+my public key, then I decode it with my private key, verifying that I am the proper
+client. Vice versa for the client to server direction), so they would not have gained any
+extra information from my keystrokes.
+
+If other teams had physical control of the USB, 2 cases could happen. If my private key
+had a password, it would be still secure as they do not know my password and could not
+access my private key. However, if my private key did not have a password (or they were
+logging my keystrokes), they could easily access my private key, and thus the resulting
+network is no longer secure.
+
+
+
+2. gpg2 --verify issues:
+The gpg2 --verify command is supposed to verify if the public key matches the detached
+signature. However, someone could intercept this public key, file, and detached signature
+package and send their own using their own public key and detached signature created from
+their own private key. The gpg2 --verfiy command would be useless against this, as it does
+not verify if the public key received is the public key of the sender that you wanted to
+receive the file from. Therefore, the check would pass in this case even though it
+shouldn't. If you wanted to fix this problem, you would have to go through a third party to
+check if the public key matches the appropriate sender's public key.
