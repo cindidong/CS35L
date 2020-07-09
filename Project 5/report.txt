@@ -1,0 +1,302 @@
+Cindi Dong
+Lab 2
+
+Lab:
+1. Writing tr2b.c:
+I parsed my arguments using argc and argv[] from main, 
+checking if there was the right amount and size. I then used a 
+look up table to search for duplicates. I called malloc for the 
+first character and used realloc for the rest. I decided to store 
+10000 bytes in that space. After 10000 bytes, I printed it out using 
+putchar(). Then I freed the array and replaced it with a call to malloc 
+for 1 character. This was to save memory for large files.
+
+
+2. Writing tr2u.c:
+My tr2u was similar, but I replaced the getchar() and putchar() with 
+read and write. I still used the buffering method as described above, 
+because if I didn't strace and time would take too long. Looking at 
+the time command below, it only really cut down the write time.
+
+
+3. strace on a 5,000,000 byte file:
+I used the shuf command from Assignment 3.
+Commands:
+shuf -r -n 5000000 > bigfile.txt
+test
+bytes
+five
+
+File:
+strace -c -o buffTrace ./tr2b 'y' 't' < bigfile.txt > buffResult
+
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 63.52    0.002013           1      3256           write
+ 33.89    0.001074           0      3258           read
+  0.73    0.000023           3         9           mmap
+  0.66    0.000021           5         4           mprotect
+  0.38    0.000012          12         1           munmap
+  0.38    0.000012           3         4           brk
+  0.22    0.000007           2         4           fstat
+  0.13    0.000004           4         1           arch_prctl
+  0.09    0.000003           2         2           close
+  0.00    0.000000           0         2           open
+  0.00    0.000000           0         1         1 access
+  0.00    0.000000           0         1           execve
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.003169                  6543         1 total
+
+strace -c -o uBuffTrace ./tr2u 'y' 't' < bigfile.txt > uBuffResult
+
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 99.96  128.087650           5  26667692           read
+  0.04    0.052422          20      2667           write
+  0.00    0.000000           0         2           open
+  0.00    0.000000           0         2           close
+  0.00    0.000000           0         2           fstat
+  0.00    0.000000           0         7           mmap
+  0.00    0.000000           0         4           mprotect
+  0.00    0.000000           0         1           munmap
+  0.00    0.000000           0         4           brk
+  0.00    0.000000           0         1         1 access
+  0.00    0.000000           0         1           execve
+  0.00    0.000000           0         1           arch_prctl
+------ ----------- ----------- --------- --------- ----------------
+100.00  128.140072              26670384         1 total
+
+
+
+Terminal:
+strace -c -o buffTraceTerminal ./tr2b 'y' 't' < bigfile.txt
+
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 99.95   45.746477           9   5000000           write
+  0.05    0.023254           7      3258           read
+  0.00    0.000000           0         2           open
+  0.00    0.000000           0         2           close
+  0.00    0.000000           0         4           fstat
+  0.00    0.000000           0         9           mmap
+  0.00    0.000000           0         4           mprotect
+  0.00    0.000000           0         1           munmap
+  0.00    0.000000           0         4           brk
+  0.00    0.000000           0         1         1 access
+  0.00    0.000000           0         1           execve
+  0.00    0.000000           0         1           arch_prctl
+------ ----------- ----------- --------- --------- ----------------
+100.00   45.769731               5003287         1 total
+
+strace -c -o uBuffTraceTerminal ./tr2u 'y' 't' < bigfile.txt
+
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 96.60  115.026318           4  26667692           read
+  3.40    4.043368        1516      2667           write
+  0.00    0.000116          17         7           mmap
+  0.00    0.000060          15         4           mprotect
+  0.00    0.000039          10         4           brk
+  0.00    0.000024          12         2           open
+  0.00    0.000019          10         2           fstat
+  0.00    0.000015           8         2           close
+  0.00    0.000015          15         1           execve
+  0.00    0.000014          14         1           munmap
+  0.00    0.000011          11         1         1 access
+  0.00    0.000011          11         1           arch_prctl
+------ ----------- ----------- --------- --------- ----------------
+100.00  119.070010              26670384         1 total
+
+The number of write calls is smaller based on the way I 
+wrote my tr2u program. For the file, tr2b (buffered) had a 
+lot less system calls than tr2u (unbuffered).
+
+
+4. Time:
+File:
+time ./tr2b 'y' 't' < bigfile.txt > buffResult
+real 0m2.577s
+user 0m1.995s
+sys  0m0.128s
+
+time ./tr2u 'y' 't' < bigfile.txt > uBuffResult
+real 0m28.874s
+user 0m9.897s
+sys  0m18.456s
+
+
+Terminal:
+time ./tr2b 'y' 't' < bigfile.txt
+real 0m12.921s
+user 0m4.295s
+sys  0m8.286s
+
+time ./tr2u 'y' 't' < bigfile.txt
+real 0m53.802s
+user 0m15.265s
+sys  0m37.935s
+
+
+
+
+
+HW:
+1. sfrob vs sfrobu:
+Creating the files:
+shuf -n 0 -r > zero.txt
+*~BO *{_CIA *hXE]D *LER #@_GZY
+shuf -n 100 -r > hundred.txt
+*~BO *{_CIA *hXE]D *LER #@_GZY
+shuf -n 10000 -r > thousand.txt
+*~BO *{_CIA *hXE]D *LER #@_GZY
+shuf -n 1000000 -r > million.txt
+*~BO *{_CIA *hXE]D *LER #@_GZY
+
+Running the files:
+sfrob:
+time ./sfrob < zero.txt
+real 0m0.074s
+user 0m0.007s
+sys  0m0.011s
+
+time ./sfrob < hundred.txt
+real 0m0.038s
+user 0m0.016s
+sys  0m0.020s
+
+time ./sfrob < thousand.txt
+real 0m20.222s
+user 0m3.895s
+sys  0m12.954s
+
+time ./sfrob < million.txt
+real 0m72.640s
+user 0m13.891s
+sys  0m20.209s
+
+CPU time cost: (million-hundred)/(1,000,000-100)x + zero 
+= (72.640-0.038)/(1,000,000-100)x + 0.074
+
+sfrobu:
+time ./sfrobu < zero.txt
+real 0m0.022s
+user 0m0.009s
+sys  0m0.005s
+
+time ./sfrobu < hundred.txt
+real 0m0.018s
+user 0m0.006s
+sys  0m0.010s
+
+time ./sfrobu < thousand.txt
+real 0m0.310s
+user 0m0.228s
+sys  0m0.078s
+
+time ./sfrobu < million.txt
+real 0m38.533s
+user 0m30.829s
+sys  0m7.143s
+
+CPU time cost: (million-hundred)/(1,000,000-100)x + zero
+= (38.533-0.018)/(1,000,000-100)x + 0.022
+
+
+
+2. System calls for malloc, realloc, and free:
+I used strace to see what system calls are being used.
+strace -c -o zeroCalls ./sfrobu < zero.txt
+
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 30.91    0.000217          31         7           mmap
+ 12.96    0.000091          91         1           munmap
+ 11.25    0.000079          40         2           open
+ 10.68    0.000075          19         4           brk
+  8.69    0.000061          20         3           fstat
+  6.98    0.000049          25         2           read
+  5.70    0.000040          40         1         1 access
+  4.99    0.000035          18         2           close
+  4.84    0.000034           9         4           mprotect
+  2.99    0.000021          21         1           arch_prctl
+  0.00    0.000000           0         1           execve
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.000702                    28         1 total
+
+
+strace -c -o hundredCalls ./sfrobu < hundred.txt
+
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 91.11    0.008836          22       401           write
+  1.48    0.000144          18         8           mmap
+  1.40    0.000136          68         2           munmap
+  1.36    0.000132          33         4           mprotect
+  1.14    0.000111          28         4           read
+  0.98    0.000095          32         3           open
+  0.75    0.000073          18         4           brk
+  0.64    0.000062          16         4           fstat
+  0.60    0.000058          19         3           close
+  0.22    0.000021          21         1           arch_prctl
+  0.19    0.000018          18         1         1 access
+  0.12    0.000012          12         1           execve
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.009698                   436         1 total
+
+
+strace -c -o thousandCalls ./sfrobu < thousand.txt
+
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 99.24    0.398403          10     40001           write
+  0.34    0.001381         345         4           read
+  0.12    0.000465          93         5           munmap
+  0.08    0.000303          28        11           mmap
+  0.07    0.000290          13        22           brk
+  0.04    0.000168          42         4           mprotect
+  0.04    0.000152          51         3           open
+  0.03    0.000103          26         4           fstat
+  0.03    0.000101          34         3           close
+  0.01    0.000034          34         1           execve
+  0.01    0.000027          27         1         1 access
+  0.00    0.000019          19         1           arch_prctl
+------ ----------- ----------- --------- --------- ----------------
+100.00    0.401446                 40060         1 total
+
+
+strace -c -o millionCalls ./sfrobu < million.txt
+% time     seconds  usecs/call     calls    errors syscall
+------ ----------- ----------- --------- --------- ----------------
+ 99.43   29.969059           7   4000001           write
+  0.40    0.120504       30126         4           read
+  0.13    0.038090        7618         5           munmap
+  0.04    0.012160           6      1896           brk
+  0.00    0.000312          28        11           mmap
+  0.00    0.000183          46         4           mprotect
+  0.00    0.000141          47         3           open
+  0.00    0.000109          27         4           fstat
+  0.00    0.000086          29         3           close
+  0.00    0.000043          43         1         1 access
+  0.00    0.000037          37         1           execve
+  0.00    0.000015          15         1           arch_prctl
+------ ----------- ----------- --------- --------- ----------------
+100.00   30.140739               4001934         1 total
+
+
+From other classes and the man page for each system call, brk, 
+mmap, and munmap are of interest.
+
+man brk (change data segment size)
+Function declaration: 
+int brk(void *addr);
+
+man mmap (map or unmap files or devices into memory)
+Function declaration: 
+void *mmap(void *addr, size_t length, int prot, int flags, 
+int fd, off_t offset);
+
+
+man munmap (map or unmap files or devices into memory)
+Function declaration: 
+int munmap(void *addr, size_t length);
+
