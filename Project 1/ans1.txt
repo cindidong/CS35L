@@ -1,5 +1,4 @@
 Cindi Dong
-405126747
 
 Lab:
 1. The shell command is man -k [word].
